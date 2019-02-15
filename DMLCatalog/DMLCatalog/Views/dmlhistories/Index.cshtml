@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DMLCatalog.Models.dmlhistory>
+
+@{
+    ViewBag.Title = "История изменений";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.datetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.eventtext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paramname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paramold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paramnew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dmlcatalog.name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.datetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.eventtext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paramname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paramold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paramnew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dmlcatalog.name)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>*@
+    </tr>
+}
+
+</table>

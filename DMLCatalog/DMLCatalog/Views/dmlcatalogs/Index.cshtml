@@ -1,0 +1,129 @@
+﻿@model IEnumerable<DMLCatalog.Models.dmlcatalog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список ПО</h2>
+
+@if (ViewBag.groups.Contains("DMLAdmins") || ViewBag.groups.Contains("DMLTesters"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Имя")
+            </th>
+            @if (ViewBag.groups.Contains("DMLAdmins"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.guid)
+                </th>
+            }
+            <th>
+                @Html.DisplayName("Версия")
+            </th>
+            <th>
+                @Html.DisplayName("Описание")
+            </th>
+            <th>
+                @Html.DisplayName("Язык")
+            </th>
+            <th>
+                @Html.DisplayName("Разработчик")
+            </th>
+            @if (ViewBag.groups.Contains("DMLAdmins"))
+            {
+                <th>
+                    @Html.DisplayName("Состояние")
+                </th>
+            }
+            <th>
+                @Html.DisplayName("Тип приложения")
+            </th>
+            <th>
+                @Html.DisplayName("Путь")
+            </th>
+            <th>
+                @Html.DisplayName("Только чтение")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                @if (ViewBag.groups.Contains("DMLAdmins"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.guid)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.version)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dmllocalize.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dmlpublisher.name)
+                </td>
+                @if (ViewBag.groups.Contains("DMLAdmins"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dmlstate.name)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.dmltype.name)
+                </td>
+                @{string path = item.path;
+                    string npath = "";
+                }
+
+                @foreach (char s in path)
+
+                {
+                    if (s == '\\')
+                    { npath += "/"; }
+                    else
+                    {
+                        npath += s;
+                    }
+                }
+                @{npath = "file:" + npath;}
+
+                <td>
+                    <a onclick="run('@npath')">@Html.DisplayFor(modelItem => item.path)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.locked)
+                </td>
+                <td>
+                    @if (ViewBag.groups.Contains("DMLAdmins"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id })}|
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) @*|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <script>
+        function run(command) {
+            //window.open(command);
+            var myshell = new ActiveXObject("WScript.shell");
+            myshell.run(command);
+        }
+    </script>

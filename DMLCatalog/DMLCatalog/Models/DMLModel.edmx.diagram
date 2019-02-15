@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6dc07cbde6a48509ebfec678d1033fa" Name="Diagram1">
+        <EntityTypeShape EntityType="dmldbModel.dmlcatalog" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmldbModel.dmlhistory" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmldbModel.dmllocalize" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmldbModel.dmlpublisher" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmldbModel.dmlstate" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dmldbModel.dmltype" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="dmldbModel.FK_dmlcatalog_dmllocalize" ManuallyRouted="false" />
+        <AssociationConnector Association="dmldbModel.FK_dmlcatalog_dmlpublisher" ManuallyRouted="false" />
+        <AssociationConnector Association="dmldbModel.FK_dmlcatalog_dmlstate" ManuallyRouted="false" />
+        <AssociationConnector Association="dmldbModel.FK_dmlcatalog_dmltype" ManuallyRouted="false" />
+        <AssociationConnector Association="dmldbModel.FK_dmlhistory_dmlcatalog" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,74 @@
+﻿@model DMLCatalog.Models.dmlhistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>dmlhistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.datetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.eventtext)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventtext)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paramname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paramname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paramold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paramold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paramnew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paramnew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dmlcatalog.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dmlcatalog.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

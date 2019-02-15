@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DMLService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://test-app-01:8080/dmlservice?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://test-app-01:8080/dmlservice?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://test-app-01:8080/dmlservice?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DMLService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDMLService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_CreateFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_CreateFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_EditAccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditAccess" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_EditAccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditAccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_Error_InputMessage">
+    <wsdl:part name="parameters" element="tns:Error" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_Error_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="IDMLService_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDMLService">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsam:Action="http://tempuri.org/IDMLService/GetData" message="tns:IDMLService_GetData_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDMLService/GetDataResponse" message="tns:IDMLService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolder">
+      <wsdl:input wsam:Action="http://tempuri.org/IDMLService/CreateFolder" message="tns:IDMLService_CreateFolder_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDMLService/CreateFolderResponse" message="tns:IDMLService_CreateFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAccess">
+      <wsdl:input wsam:Action="http://tempuri.org/IDMLService/EditAccess" message="tns:IDMLService_EditAccess_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDMLService/EditAccessResponse" message="tns:IDMLService_EditAccess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Error">
+      <wsdl:input wsam:Action="http://tempuri.org/IDMLService/Error" message="tns:IDMLService_Error_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDMLService/ErrorResponse" message="tns:IDMLService_Error_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsam:Action="http://tempuri.org/IDMLService/GetDataUsingDataContract" message="tns:IDMLService_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDMLService/GetDataUsingDataContractResponse" message="tns:IDMLService_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDMLService" type="tns:IDMLService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IDMLService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolder">
+      <soap:operation soapAction="http://tempuri.org/IDMLService/CreateFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAccess">
+      <soap:operation soapAction="http://tempuri.org/IDMLService/EditAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Error">
+      <soap:operation soapAction="http://tempuri.org/IDMLService/Error" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/IDMLService/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DMLService">
+    <wsdl:port name="BasicHttpBinding_IDMLService" binding="tns:BasicHttpBinding_IDMLService">
+      <soap:address location="http://test-app-01:8080/dmlservice" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище dmldbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dmlcatalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="guid" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="version" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="stateid" Type="int" Nullable="false" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="publisherid" Type="int" />
+          <Property Name="localizeid" Type="int" />
+          <Property Name="path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="locked" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dmlhistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="catalogid" Type="int" Nullable="false" />
+          <Property Name="datetime" Type="datetime" Nullable="false" />
+          <Property Name="owner" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="eventtext" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paramname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paramold" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="paramnew" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dmllocalize">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dmlpublisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="dmlstate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="dmltype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dmlcatalog_dmllocalize">
+          <End Role="dmllocalize" Type="Self.dmllocalize" Multiplicity="0..1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmllocalize">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="localizeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmlpublisher">
+          <End Role="dmlpublisher" Type="Self.dmlpublisher" Multiplicity="0..1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlpublisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="publisherid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmlstate">
+          <End Role="dmlstate" Type="Self.dmlstate" Multiplicity="1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlstate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmltype">
+          <End Role="dmltype" Type="Self.dmltype" Multiplicity="1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmltype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="typeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlhistory_dmlcatalog">
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="1" />
+          <End Role="dmlhistory" Type="Self.dmlhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlcatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlhistory">
+              <PropertyRef Name="catalogid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище dmldbModelContainer">
+          <EntitySet Name="dmlcatalog" EntityType="Self.dmlcatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dmlhistory" EntityType="Self.dmlhistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dmllocalize" EntityType="Self.dmllocalize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dmlpublisher" EntityType="Self.dmlpublisher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dmlstate" EntityType="Self.dmlstate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dmltype" EntityType="Self.dmltype" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dmlcatalog_dmllocalize" Association="Self.FK_dmlcatalog_dmllocalize">
+            <End Role="dmllocalize" EntitySet="dmllocalize" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmlpublisher" Association="Self.FK_dmlcatalog_dmlpublisher">
+            <End Role="dmlpublisher" EntitySet="dmlpublisher" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmlstate" Association="Self.FK_dmlcatalog_dmlstate">
+            <End Role="dmlstate" EntitySet="dmlstate" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmltype" Association="Self.FK_dmlcatalog_dmltype">
+            <End Role="dmltype" EntitySet="dmltype" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlhistory_dmlcatalog" Association="Self.FK_dmlhistory_dmlcatalog">
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+            <End Role="dmlhistory" EntitySet="dmlhistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dmldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dmlcatalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="version" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="stateid" Type="Int32" Nullable="false" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="publisherid" Type="Int32" />
+          <Property Name="localizeid" Type="Int32" />
+          <NavigationProperty Name="dmllocalize" Relationship="Self.FK_dmlcatalog_dmllocalize" FromRole="dmlcatalog" ToRole="dmllocalize" />
+          <NavigationProperty Name="dmlpublisher" Relationship="Self.FK_dmlcatalog_dmlpublisher" FromRole="dmlcatalog" ToRole="dmlpublisher" />
+          <NavigationProperty Name="dmlstate" Relationship="Self.FK_dmlcatalog_dmlstate" FromRole="dmlcatalog" ToRole="dmlstate" />
+          <NavigationProperty Name="dmltype" Relationship="Self.FK_dmlcatalog_dmltype" FromRole="dmlcatalog" ToRole="dmltype" />
+          <Property Name="path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="locked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dmlhistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="catalogid" Type="Int32" Nullable="false" />
+          <Property Name="datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="owner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eventtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paramname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paramold" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paramnew" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="dmlcatalog" Relationship="Self.FK_dmlhistory_dmlcatalog" FromRole="dmlhistory" ToRole="dmlcatalog" />
+        </EntityType>
+        <EntityType Name="dmllocalize">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="dmlcatalog" Relationship="Self.FK_dmlcatalog_dmllocalize" FromRole="dmllocalize" ToRole="dmlcatalog" />
+        </EntityType>
+        <EntityType Name="dmlpublisher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="dmlcatalog" Relationship="Self.FK_dmlcatalog_dmlpublisher" FromRole="dmlpublisher" ToRole="dmlcatalog" />
+        </EntityType>
+        <EntityType Name="dmlstate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="dmlcatalog" Relationship="Self.FK_dmlcatalog_dmlstate" FromRole="dmlstate" ToRole="dmlcatalog" />
+        </EntityType>
+        <EntityType Name="dmltype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="dmlcatalog" Relationship="Self.FK_dmlcatalog_dmltype" FromRole="dmltype" ToRole="dmlcatalog" />
+        </EntityType>
+        <Association Name="FK_dmlcatalog_dmllocalize">
+          <End Role="dmllocalize" Type="Self.dmllocalize" Multiplicity="0..1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmllocalize">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="localizeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmlpublisher">
+          <End Role="dmlpublisher" Type="Self.dmlpublisher" Multiplicity="0..1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlpublisher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="publisherid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmlstate">
+          <End Role="dmlstate" Type="Self.dmlstate" Multiplicity="1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlstate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlcatalog_dmltype">
+          <End Role="dmltype" Type="Self.dmltype" Multiplicity="1" />
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmltype">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlcatalog">
+              <PropertyRef Name="typeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dmlhistory_dmlcatalog">
+          <End Role="dmlcatalog" Type="Self.dmlcatalog" Multiplicity="1" />
+          <End Role="dmlhistory" Type="Self.dmlhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dmlcatalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dmlhistory">
+              <PropertyRef Name="catalogid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dmldbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dmlcatalog" EntityType="Self.dmlcatalog" />
+          <EntitySet Name="dmlhistory" EntityType="Self.dmlhistory" />
+          <EntitySet Name="dmllocalize" EntityType="Self.dmllocalize" />
+          <EntitySet Name="dmlpublisher" EntityType="Self.dmlpublisher" />
+          <EntitySet Name="dmlstate" EntityType="Self.dmlstate" />
+          <EntitySet Name="dmltype" EntityType="Self.dmltype" />
+          <AssociationSet Name="FK_dmlcatalog_dmllocalize" Association="Self.FK_dmlcatalog_dmllocalize">
+            <End Role="dmllocalize" EntitySet="dmllocalize" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmlpublisher" Association="Self.FK_dmlcatalog_dmlpublisher">
+            <End Role="dmlpublisher" EntitySet="dmlpublisher" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmlstate" Association="Self.FK_dmlcatalog_dmlstate">
+            <End Role="dmlstate" EntitySet="dmlstate" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlcatalog_dmltype" Association="Self.FK_dmlcatalog_dmltype">
+            <End Role="dmltype" EntitySet="dmltype" />
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dmlhistory_dmlcatalog" Association="Self.FK_dmlhistory_dmlcatalog">
+            <End Role="dmlcatalog" EntitySet="dmlcatalog" />
+            <End Role="dmlhistory" EntitySet="dmlhistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище dmldbModelContainer" CdmEntityContainer="dmldbEntities">
+          <EntitySetMapping Name="dmlcatalog">
+            <EntityTypeMapping TypeName="dmldbModel.dmlcatalog">
+              <MappingFragment StoreEntitySet="dmlcatalog">
+                <ScalarProperty Name="locked" ColumnName="locked" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="publisherid" ColumnName="publisherid" />
+                <ScalarProperty Name="localizeid" ColumnName="localizeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dmlhistory">
+            <EntityTypeMapping TypeName="dmldbModel.dmlhistory">
+              <MappingFragment StoreEntitySet="dmlhistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="catalogid" ColumnName="catalogid" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="eventtext" ColumnName="eventtext" />
+                <ScalarProperty Name="paramname" ColumnName="paramname" />
+                <ScalarProperty Name="paramold" ColumnName="paramold" />
+                <ScalarProperty Name="paramnew" ColumnName="paramnew" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dmllocalize">
+            <EntityTypeMapping TypeName="dmldbModel.dmllocalize">
+              <MappingFragment StoreEntitySet="dmllocalize">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dmlpublisher">
+            <EntityTypeMapping TypeName="dmldbModel.dmlpublisher">
+              <MappingFragment StoreEntitySet="dmlpublisher">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dmlstate">
+            <EntityTypeMapping TypeName="dmldbModel.dmlstate">
+              <MappingFragment StoreEntitySet="dmlstate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dmltype">
+            <EntityTypeMapping TypeName="dmldbModel.dmltype">
+              <MappingFragment StoreEntitySet="dmltype">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

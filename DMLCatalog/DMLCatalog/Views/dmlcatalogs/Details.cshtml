@@ -1,0 +1,98 @@
+﻿@model DMLCatalog.Models.dmlcatalog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>dmlcatalog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Имя")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.guid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.guid)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Версия")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.version)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Описание")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Язык")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dmllocalize.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Разработчик")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dmlpublisher.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Состояние")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dmlstate.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Тип")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dmltype.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Путь")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.path)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Только чтение")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.locked)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
