@@ -1,3 +1,3 @@
 Digital Media Library  
-DMLCatalog - это веб-приложение для учета программного обеспечения  
-DMLService - вспомогательная служба для управления правами к файловому хранилищу программного обеспечения
+DMLCatalog - software accounting web application  
+DMLService - helper service for managing file storage rights for software
